@@ -14,23 +14,21 @@ var Main = React.createClass({
 
     return {
       viewLabel: "View Saved",
-	  viewSaved: true,
-	  scrapedArticles: []
+      viewSaved: true,
+      scrapedArticles: []
     };
   },
 
   // Here we describe our component's render method
   render: function() {
     return (
-		<div>Hello I am main
-		<div id="grid">
-			<Saved/>
-      <Search/>
-		</div>
+      <div>Hello I am main
+        <div id="grid">
+          <Saved/>
+          <Search/>
+        </div>
       </div>
-
-    );
-  }
+    )}
 });
 
 // Export the component back for use in other files

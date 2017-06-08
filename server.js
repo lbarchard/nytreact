@@ -7,12 +7,10 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-// Requiring our Note and Article models
-var Note = require("./models/note.js");
+// Requiring our Article models
 var Article = require("./models/article.js");
 // Our scraping tools
 var request = require("request");
-var cheerio = require("cheerio");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
@@ -63,7 +61,10 @@ app.post("/saved", function(req, res) {
 });
 
 app.delete("/saved/:id", function(req, res) {
-	console.log("Got to the delete route")
+	Article.find({ _id: req.params.id }).remove(function(error, doc) {
+		if (error) {console.log(error)}
+		else {res.send({result: "success"})}
+	});
 });
 
 // Listen on port 3000
