@@ -81,17 +81,13 @@ app.get("/articles/:topic/:start/:end", function(req, res) {
 		'sort': "newest"
   		},
 	}, function(err, response, body) {
-	body = JSON.parse(body);
-	
-	const cleanResponse = body.response.docs.map(function(data) {
+	const minimalResponse = JSON.parse(body).response.docs.map(function(data) {
 		return {
 			web_url: data.web_url,
 			title: data.headline.main,
 		}
-		});
-
-		console.log(body);
-	    {res.json(cleanResponse)}
+	});
+	{res.json(minimalResponse)}
 	})
 
 
