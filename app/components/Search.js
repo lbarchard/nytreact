@@ -2,10 +2,6 @@
 var React = require("react");
 var ReactDOM = require("react-dom")
 
-// Here we include all of the sub-components
-var Query = require("./Query");
-var Results = require("./Results");
-
 // This is the main component
 var Search = React.createClass({
 
@@ -17,10 +13,30 @@ var Search = React.createClass({
 	// Here we describe our component's render method
 	render: function() {
 		return (
-			<div>Hello I am Search
+			<div>
 				<div id="query">
-					<Query/>
-					<Results/>
+					<div className="panel panel-default">
+					<div className="panel-heading">
+						<h3 className="panel-title">Search</h3>
+					</div>
+					<div className="panel-body">
+						<form>
+							<div className="form-group">
+								<label>Topic</label>
+								<input type="text" className="form-control" id="topic" placeholder="Type your search here"></input>
+							</div>
+							<div className="form-group">
+								<label>Start Date</label>
+								<input type="date" className="form-control" id="topic" placeholder="Start Date"></input>
+							</div>
+							<div className="form-group">
+								<label>End Date</label>
+								<input type="date" className="form-control" id="topic" placeholder="End Date"></input>
+							</div>
+							<button type="submit" className="btn btn-default">Search</button>
+						</form>
+					</div>
+					</div>
 				</div>
 			</div>
 		);

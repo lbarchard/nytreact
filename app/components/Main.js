@@ -3,8 +3,11 @@ var React = require("react");
 var ReactDOM = require("react-dom")
 
 // Here we include all of the sub-components
-var Saved = require("./Saved");
 var Search = require("./Search");
+var Results = require("./Results");
+var Saved = require("./Saved");
+
+
 
 // This is the main component
 var Main = React.createClass({
@@ -13,19 +16,22 @@ var Main = React.createClass({
   getInitialState: function() {
 
     return {
-      viewLabel: "View Saved",
-      viewSaved: true,
-      scrapedArticles: []
+
     };
   },
 
   // Here we describe our component's render method
   render: function() {
     return (
-      <div>Hello I am main
-        <div id="grid">
-          <Saved/>
+      <div>
+        <div className="container-fluid">
+          <div className="jumbotron">
+            <h1>New York Time Article Scrubber</h1>
+            <p>Search for and annotate articles of interest</p>
+          </div>
           <Search/>
+          <Results/>
+          <Saved/>
         </div>
       </div>
     )}
