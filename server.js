@@ -67,6 +67,37 @@ app.delete("/saved/:id", function(req, res) {
 	});
 });
 
+
+// *************  Routes ************//
+// This will get the articles we saved to the mongoDB
+app.get("/articles/:topic/:start/:end", function(req, res) {
+	request.get({
+		url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+		qs: {
+		'api-key': "90c54821482c40c8bf03b3f3710dfede",
+		'q': req.params.topic,
+		'begin_date': req.params.start,
+		'end_date': req.params.end,
+		'sort': "newest"
+  		},
+	}, function(err, response, body) {
+	body = JSON.parse(body);
+	
+	const cleanResponse = body.response.docs.map(function(data) {
+		return {
+			web_url: data.web_url,
+			title: data.headline.main,
+		}
+		});
+
+		console.log(body);
+	    {res.json(cleanResponse)}
+	})
+
+
+});
+
+
 // Listen on port 3000
 app.listen(process.env.PORT || 3000, function() {
   console.log("App running on port 3000!");

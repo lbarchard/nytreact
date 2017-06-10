@@ -26,7 +26,7 @@ var Main = React.createClass({
       <div>
         <div className="container-fluid">
           <div className="jumbotron">
-            <h1>New York Time Article Scrubber</h1>
+            <h1>New York Times Article Scrubber</h1>
             <p>Search for and annotate articles of interest</p>
           </div>
           <Search/>

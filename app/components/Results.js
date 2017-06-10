@@ -2,12 +2,19 @@
 var React = require("react");
 var ReactDOM = require("react-dom")
 
+// Here we include all of the sub-components
+var ResultsItem = require("./ResultsItem");
+
 // This is the main component
 var Results = React.createClass({
 
   // Here we set a generic state associated with the number of clicks
 	getInitialState: function() {
 		return {};
+	},
+
+	renderResultItems: function() {
+		return <ResultsItem />
 	},
 
 	// Here we describe our component's render method
@@ -21,14 +28,7 @@ var Results = React.createClass({
 						</div>
 						<div className="panel-body">
 							<ul className="list-group">
-								<li className="list-group-item">
-									<a href="https://www.w3schools.com">Man lands on the moon</a>		
-									<span type="button" className="pull-right btn btn-primary btn-xs">Save</span>
-								</li>
-								<li className="list-group-item">
-									<a href="https://www.w3schools.com">Georgia Tech wins National Championship</a>	
-									<span type="button" className="pull-right btn btn-primary btn-xs">Save</span>
-								</li>
+								{this.renderResultItems()}
 							</ul>
 						</div>
 					</div>
