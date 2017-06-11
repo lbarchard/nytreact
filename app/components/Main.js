@@ -9,18 +9,39 @@ var Saved = require("./Saved");
 
 
 
-// This is the main component
 var Main = React.createClass({
 
-  // Here we set a generic state associated with the number of clicks
   getInitialState: function() {
-
     return {
-
+			topic: "",
+			start: "",
+			end: "",
+			articles: []
     };
   },
 
-  // Here we describe our component's render method
+  setArticles: function (newArticles) {
+    this.setState({articles: newArticles})
+  },
+
+	search: function (topic, start, end) {
+    if (topic === '' || start === '' || end === '') {
+      this.setState({articles: []})
+    }
+    else {
+      var start = start.replace("-", "").replace("-", "");
+      var end   = end.replace("-", "").replace("-", "");
+      axios.get('/articles/' + topic + '/' + start + '/' + end)
+      .then(function (response) {
+        this.setState({articles: response.data})
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error);
+        this.setState({articles: []})
+      });
+    }
+  },
+
   render: function() {
     return (
       <div>
@@ -29,13 +50,12 @@ var Main = React.createClass({
             <h1>New York Times Article Scrubber</h1>
             <p>Search for and annotate articles of interest</p>
           </div>
-          <Search/>
-          <Results/>
+          <Search search={this.search} topic={this.state.topic} start={this.state.start} end={this.state.end}/>
+          <Results articles={this.state.articles}/>
           <Saved/>
         </div>
       </div>
     )}
 });
 
-// Export the component back for use in other files
 module.exports = Main;

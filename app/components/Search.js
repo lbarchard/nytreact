@@ -1,16 +1,29 @@
-// Include React
 var React = require("react");
 var ReactDOM = require("react-dom")
 
-// This is the main component
 var Search = React.createClass({
-
-  // Here we set a generic state associated with the number of clicks
 	getInitialState: function() {
-		return {};
+		return {
+			topic: "",
+			start: "",
+			end: ""
+		};
 	},
 
-	// Here we describe our component's render method
+	searchButton: function (event) {
+		this.props.search(this.state.topic, this.state.start, this.state.end)
+	},
+
+	topicChange: function (event) {
+		this.setState({topic: event.target.value});
+	},
+	startChange: function (event) {
+		this.setState({start: event.target.value});
+	},
+	endChange: function (event) {
+		this.setState({end: event.target.value});
+	},
+
 	render: function() {
 		return (
 			<div>
@@ -23,17 +36,17 @@ var Search = React.createClass({
 						<form>
 							<div className="form-group">
 								<label>Topic</label>
-								<input type="text" className="form-control" id="topic" placeholder="Type your search here"></input>
+								<input id="topic" onChange={this.topicChange} type="text" className="form-control" id="topic" value={this.state.topic} placeholder="Type your search here"></input>
 							</div>
 							<div className="form-group">
 								<label>Start Date</label>
-								<input type="date" className="form-control" id="topic" placeholder="Start Date"></input>
+								<input id="start" onChange={this.startChange} type="date" className="form-control" id="topic" value={this.state.start} placeholder="Start Date"></input>
 							</div>
 							<div className="form-group">
 								<label>End Date</label>
-								<input type="date" className="form-control" id="topic" placeholder="End Date"></input>
+								<input id="end" onChange={this.endChange} type="date" className="form-control" id="topic" value={this.state.end} placeholder="End Date"></input>
 							</div>
-							<button type="submit" className="btn btn-default">Search</button>
+							<button onClick={this.searchButton} type="button" className="btn btn-default">Search</button>
 						</form>
 					</div>
 					</div>
@@ -43,5 +56,4 @@ var Search = React.createClass({
 	}
 });
 
-// Export the component back for use in other files
 module.exports = Search;

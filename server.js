@@ -23,6 +23,8 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+app.use(bodyParser.raw());
+app.use(bodyParser.json());
 
 // Make public a static dir
 app.use(express.static("public"));
@@ -71,6 +73,9 @@ app.delete("/saved/:id", function(req, res) {
 // *************  Routes ************//
 // This will get the articles we saved to the mongoDB
 app.get("/articles/:topic/:start/:end", function(req, res) {
+	console.log(req.params.topic)
+	console.log(req.params.start)
+	console.log(req.params.end)
 	request.get({
 		url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
 		qs: {

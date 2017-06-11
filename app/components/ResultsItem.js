@@ -1,25 +1,35 @@
-// Include React
 var React = require("react");
 var ReactDOM = require("react-dom")
 
-// This is the main component
 var ResultsItem = React.createClass({
-
-  // Here we set a generic state associated with the number of clicks
 	getInitialState: function() {
 		return {};
 	},
 
-	// Here we describe our component's render method
+	saveItem: function(event) {
+		var title = this.props.article.title
+		axios.post('/saved',
+			{
+			'title': this.props.article.title,
+			'link': this.props.article.web_url,
+			'date': '2017-07-10'
+			}
+		)
+		.then(function (response) {
+		}.bind(this))
+		.catch(function (error) {
+			console.log(error);
+		});
+	},
+	
 	render: function() {
 		return (
-			<li className="list-group-item">
-				<a href="https://www.w3schools.com">Man lands on the moon</a>		
-				<span type="button" className="pull-right btn btn-primary btn-xs">Save</span>
+			<li key={this.props.article.key} className="list-group-item">
+				<a href={this.props.article.web_url}>{this.props.article.title}</a>		
+				<span onClick={this.saveItem} type="button" className="pull-right btn btn-primary btn-xs">Save</span>
 			</li>
 		);
 	}
 });
 
-// Export the component back for use in other files
 module.exports = ResultsItem;
