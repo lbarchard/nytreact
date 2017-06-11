@@ -10,9 +10,20 @@ var Saved = React.createClass({
 	getInitialState: function() {
 		return {};
 	},
-
 	renderSavedItems: function() {
-		return <SavedItem />
+		console.log("==========")
+		console.log(this.props.savedArticles)
+		if (this.props.savedArticles === []) {
+			return
+		}
+		else {
+			var list = this.props.savedArticles.map(function(row, index){
+				return (
+					<SavedItem key={row._id} savedArticle={row}/>
+				)
+			})
+			return <div>{list}</div>	   
+		}
 	},
 
 	render: function() {

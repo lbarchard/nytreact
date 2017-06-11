@@ -10,8 +10,8 @@ var SavedItem = React.createClass({
 	render: function() {
 		return (
 			<li className="list-group-item">
-				<div className="text-center">Date Saved: 2017/07/12</div>
-				<a href="https://www.w3schools.com">Man lands on the moon</a>		
+				<div className="text-center">{this.props.savedArticle.date}</div>
+				<a href={this.props.savedArticle.web_url}>{this.props.savedArticle.title}</a>		
 				<span type="button" className="pull-right btn btn-primary btn-xs">Remove</span>
 				<br></br><br></br>
 				<input type="text" className="form-control" placeholder="Put notes here"></input>

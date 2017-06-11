@@ -10,11 +10,11 @@ var Results = React.createClass({
 	},
 
 	renderResultItems: function() {
-		if (this.props.articles === []) {
+		if (this.props.searchedArticles === []) {
 			return
 		}
 		else {
-			var list = this.props.articles.map(function(row, index){
+			var list = this.props.searchedArticles.map(function(row, index){
 				return (
 					<ResultsItem key={index} article={row}/>
 				)
@@ -22,7 +22,7 @@ var Results = React.createClass({
 			return <div>{list}</div>	   
 		}
 	},
-	
+
 	render: function() {
 		return (
 			<div id="query" className="panel panel-default">

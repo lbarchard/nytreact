@@ -16,28 +16,39 @@ var Main = React.createClass({
 			topic: "",
 			start: "",
 			end: "",
-			articles: []
+			searchedArticles: [{title: "something", link: "https://www.gmail.com"}],
+      savedArticles: []
     };
+  },
+  componentWillMount: function() {
+      axios.get('/saved/')
+      .then(function (response) {
+        this.setState({savedArticles: response.data})
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error);
+        this.setState({savedArticles: []})
+      });
   },
 
   setArticles: function (newArticles) {
-    this.setState({articles: newArticles})
+    this.setState({searchedArticles: newArticles})
   },
 
 	search: function (topic, start, end) {
     if (topic === '' || start === '' || end === '') {
-      this.setState({articles: []})
+      this.setState({searchedArticles: []})
     }
     else {
       var start = start.replace("-", "").replace("-", "");
       var end   = end.replace("-", "").replace("-", "");
       axios.get('/articles/' + topic + '/' + start + '/' + end)
       .then(function (response) {
-        this.setState({articles: response.data})
+        this.setState({searchedArticles: response.data})
       }.bind(this))
       .catch(function (error) {
         console.log(error);
-        this.setState({articles: []})
+        this.setState({searchedArticles: []})
       });
     }
   },
@@ -51,8 +62,8 @@ var Main = React.createClass({
             <p>Search for and annotate articles of interest</p>
           </div>
           <Search search={this.search} topic={this.state.topic} start={this.state.start} end={this.state.end}/>
-          <Results articles={this.state.articles}/>
-          <Saved/>
+          <Results searchedArticles={this.state.searchedArticles}/>
+          <Saved savedArticles={this.state.savedArticles}/>
         </div>
       </div>
     )}

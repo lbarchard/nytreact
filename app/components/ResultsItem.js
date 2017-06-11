@@ -21,7 +21,7 @@ var ResultsItem = React.createClass({
 			console.log(error);
 		});
 	},
-	
+
 	render: function() {
 		return (
 			<li key={this.props.article.key} className="list-group-item">
