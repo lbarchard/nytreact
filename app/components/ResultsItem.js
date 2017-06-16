@@ -16,6 +16,7 @@ var ResultsItem = React.createClass({
 			}
 		)
 		.then(function (response) {
+			this.props.getSavedArticles()
 		}.bind(this))
 		.catch(function (error) {
 			console.log(error);

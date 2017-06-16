@@ -7,8 +7,6 @@ var Search = require("./Search");
 var Results = require("./Results");
 var Saved = require("./Saved");
 
-
-
 var Main = React.createClass({
 
   getInitialState: function() {
@@ -16,11 +14,16 @@ var Main = React.createClass({
 			topic: "",
 			start: "",
 			end: "",
-			searchedArticles: [{title: "something", link: "https://www.gmail.com"}],
+			searchedArticles: [],
       savedArticles: []
     };
   },
   componentWillMount: function() {
+    console.log("Main component mounting")
+    this.getSavedArticles()
+  },
+
+  getSavedArticles: function() {
       axios.get('/saved/')
       .then(function (response) {
         this.setState({savedArticles: response.data})
@@ -62,8 +65,8 @@ var Main = React.createClass({
             <p>Search for and annotate articles of interest</p>
           </div>
           <Search search={this.search} topic={this.state.topic} start={this.state.start} end={this.state.end}/>
-          <Results searchedArticles={this.state.searchedArticles}/>
-          <Saved savedArticles={this.state.savedArticles}/>
+          <Results getSavedArticles={this.getSavedArticles} searchedArticles={this.state.searchedArticles}/>
+          <Saved getSavedArticles={this.getSavedArticles} savedArticles={this.state.savedArticles}/>
         </div>
       </div>
     )}

@@ -16,9 +16,9 @@ var Results = React.createClass({
 		else {
 			var list = this.props.searchedArticles.map(function(row, index){
 				return (
-					<ResultsItem key={index} article={row}/>
+					<ResultsItem getSavedArticles={this.props.getSavedArticles} key={index} article={row}/>
 				)
-			})
+			}.bind(this))
 			return <div>{list}</div>	   
 		}
 	},

@@ -1,6 +1,3 @@
-/* Showing Mongoose's "Populated" Method (18.3.8)
- * INSTRUCTOR ONLY
- * =============================================== */
 
 // Dependencies
 var express = require("express");
@@ -71,7 +68,7 @@ app.delete("/saved/:id", function(req, res) {
 
 
 // *************  Routes ************//
-// This will get the articles we saved to the mongoDB
+// This will get the articles from NYT
 app.get("/articles/:topic/:start/:end", function(req, res) {
 	console.log(req.params.topic)
 	console.log(req.params.start)
